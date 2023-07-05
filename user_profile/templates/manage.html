@@ -9,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5">
-      <p class="fonte-destaque">Suas contas</p>
+      <p class="fonte-destaque">My accounts</p>
       <hr />
 
       <div class="contas">
@@ -21,6 +21,7 @@
             <a href="#"
               ><img
                 class="icone-setas"
+                alt="Arrow Up"
                 src="{% static 'profile/img/cancel_icon.png' %}" /></a
           ></span>
         </div>
@@ -35,31 +36,47 @@
     <div class="col-md-2"></div>
 
     <div class="col-md-5">
-      <p class="fonte-destaque">Nova conta</p>
+      <p class="fonte-destaque">New Account</p>
 
-      <form action="" method="POST">
-        <label>Apelido</label>
-        <input type="text" name="apelido" class="form-control" placeholder="" />
+      <form
+        action="{% url 'create_account' %}"
+        method="POST"
+        enctype="multipart/form-data"
+        class="mb-4"
+      >
+        {% csrf_token %}
+        <label>Nickname</label>
+        <input
+          type="text"
+          name="nickname"
+          class="form-control"
+          placeholder=""
+        />
         <br />
-        <label>Banco</label>
-        <select name="banco" class="form-select">
+        <label>Bank</label>
+        <select name="bank" class="form-select">
           <option value="NU">Nubank</option>
         </select>
         <br />
-        <label>Tipo</label>
-        <select name="tipo" class="form-select">
-          <option value="pf">Pessoa física</option>
-          <option value="pj">Pessoa jurídica</option>
+        <label>Account Type</label>
+        <select name="bank_type" class="form-select">
+          <option value="pp">Physical Person</option>
+          <option value="jp">Juridical Person</option>
         </select>
         <br />
-        <label>Valor</label>
-        <input type="number" name="valor" class="form-control" placeholder="" />
+        <label>Value</label>
+        <input type="number" name="value" class="form-control" placeholder="" />
         <br />
-        <input type="file" placeholder="Ícone" name="icone" />
+        <input type="file" placeholder="Icon" name="icon" />
         <br />
         <br />
         <input style="width: 100%" type="submit" class="botao-principal" />
       </form>
+      {% if messages %} {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-dismissible " role="alert">
+        <strong>{{ message }}</strong>
+      </div>
+      {% endfor %} {% endif %}
     </div>
   </div>
 
@@ -67,14 +84,15 @@
 
   <div class="row">
     <div class="col-md-5">
-      <span class="fonte-destaque">Nova categoria</span>
+      <span class="fonte-destaque">New Category</span>
 
-      <form action="" method="POST">
-        <label>Categoria</label>
-        <input type="text" name="categoria" class="form-control" />
+      <form action="{% url 'create_category' %}" method="POST">
+        {% csrf_token %}
+        <label>Category</label>
+        <input type="text" name="category" class="form-control" />
         <br />
 
-        <input type="checkbox" name="essencial" value="essencial" /><label
+        <input type="checkbox" name="essential" value="essential" /><label
           class="positivo"
           >&nbspEssencial</label
         >
@@ -84,7 +102,7 @@
           style="width: 100%"
           type="submit"
           class="botao-principal"
-          value="Adicionar"
+          value="Add"
         />
       </form>
     </div>
@@ -92,7 +110,7 @@
     <div class="col-md-2"></div>
 
     <div class="col-md-5">
-      <span class="fonte-destaque">Suas categoria</span>
+      <span class="fonte-destaque">My categories</span>
       <br />
       <div class="contas">
         <div class="lista-contas-main">
