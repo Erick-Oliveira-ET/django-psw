@@ -13,24 +13,34 @@
       <hr />
 
       <div class="contas">
+        {% for account in accounts %}
         <div class="lista-contas-main">
-          <span><img width="10%" src="#" />&nbsp&nbspNubank</span>
+          <span
+            ><img
+              width="10%"
+              alt=""
+              src="{{account.icon.url}}"
+            />&nbsp&nbsp{{account.nickname}}</span
+          >
 
           <span class="total-conta positivo"
-            >R$ 1.800,00&nbsp&nbsp&nbsp
-            <a href="#"
+            >R$ {{account.value}},00&nbsp&nbsp&nbsp
+            <a href="{% url '' %}"
               ><img
                 class="icone-setas"
-                alt="Arrow Up"
+                alt="Cancel Icon"
                 src="{% static 'profile/img/cancel_icon.png' %}" /></a
           ></span>
         </div>
+        {% endfor %}
         <br />
       </div>
 
       <hr />
       <span class="fonte-destaque">Total:</span>
-      <span class="positivo total-conta font-destaque">R$ 1.800,00</span>
+      <span class="positivo total-conta font-destaque"
+        >R$ {{account_total_value}},00</span
+      >
     </div>
 
     <div class="col-md-2"></div>
