@@ -7,14 +7,18 @@ from django.db.models import Sum
 
 from .forms import CategoryForm, AccountForm
 from .models import Account, Category
+from .utils import get_total
 
 # Create your views here.
 def home(req):
-    return render(req, "home.html")
+    accounts = Account.objects.all()
+    account_total_value = get_total(Account, "value")
+
+    return render(req, "home.html",  {"accounts": accounts, "account_total_value": account_total_value})
 
 def manage(req):
     accounts = Account.objects.all()
-    account_total_value = Account.objects.all().aggregate(Sum('value'))['value__sum']
+    account_total_value = get_total(Account, "value")
 
     categories = Category.objects.all()
 
@@ -67,5 +71,14 @@ def delete_account(req, id):
     account.delete()
 
     messages.add_message(req, constants.SUCCESS, 'Account deleted successfully!')
+
+    return redirect("manage") 
+
+def toggle_category_essential(req, id):
+    category = Category.objects.get(id=id)
+
+    category.essential = not category.essential 
+    
+    category.save()
 
     return redirect("manage") 

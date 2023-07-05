@@ -8,5 +8,6 @@ urlpatterns = [
     path('account/create', views.create_account, name="create_account"),
     path('account/delete/<int:id>', views.delete_account, name="delete_account"),
     path('category/create', views.create_category, name="create_category"),
+    path('category/update/<int:id>', views.toggle_category_essential, name="toggle_category_essential"),
 
 ]

@@ -122,16 +122,20 @@
     <div class="col-md-5">
       <span class="fonte-destaque">My categories</span>
       <br />
-      <div class="contas">
+      <div class="contas pt-4">
         {% for category in categories %}
         <div class="lista-contas-main">
           <span>{{category.category}}</span>
 
           <span class="total-conta"
-            ><a href="#"><img src="#" /></a
+            ><a href="{% url 'toggle_category_essential' category.id %}"
+              ><img
+                class="icone-setas"
+                alt=""
+                src="{% if category.essential %}{% static 'profile/img/check_icon.png' %}{% else %}{% static 'profile/img/cancel_icon.png' %}{% endif %}" /></a
           ></span>
         </div>
-        <br />
+        <hr />
         {% endfor %}
       </div>
     </div>
