@@ -25,7 +25,7 @@
 
           <span class="total-conta positivo"
             >R$ {{account.value}},00&nbsp&nbsp&nbsp
-            <a href="{% url '' %}"
+            <a href="{% url 'delete_account' account.id %}"
               ><img
                 class="icone-setas"
                 alt="Cancel Icon"
@@ -123,14 +123,16 @@
       <span class="fonte-destaque">My categories</span>
       <br />
       <div class="contas">
+        {% for category in categories %}
         <div class="lista-contas-main">
-          <span>Lazer</span>
+          <span>{{category.category}}</span>
 
           <span class="total-conta"
             ><a href="#"><img src="#" /></a
           ></span>
         </div>
         <br />
+        {% endfor %}
       </div>
     </div>
   </div>

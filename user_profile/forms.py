@@ -12,4 +12,4 @@ class CategoryForm(ModelForm):
     class Meta:
         # write the name of models for which the form is made
         model = Category	
-        fields = ["category","essential","planning_value"]
+        fields = ["category","essential"]
