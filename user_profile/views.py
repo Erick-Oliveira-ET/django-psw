@@ -2,7 +2,6 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.messages import constants
-from django.db.models import Sum
 
 from .forms import CategoryForm, AccountForm
 from .models import Account, Category

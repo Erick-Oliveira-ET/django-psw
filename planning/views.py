@@ -6,6 +6,12 @@ import json
 from user_profile.models import Category
 
 # Create your views here.
+def view_planning(req):
+    categories = Category.objects.all()
+
+    return render(req, 'view_planning.html', {'categories': categories})
+
+# Create your views here.
 def define_planning(req):
     categories = Category.objects.all()
 
