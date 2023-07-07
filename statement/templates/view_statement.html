@@ -1,0 +1,90 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block 'head' %}
+
+    <link href="{% static 'profile/css/home.css' %}" rel="stylesheet">
+    <link href="{% static 'profile/css/manage.css' %}" rel="stylesheet">
+    <link href="{% static 'statement/css/view_statement.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block 'body' %}
+    <br>
+    <br>
+    <div class='container'>
+        <form action="{% url 'view_statement' %}" method="GET">
+        <div class="row">
+            
+            <div class="col-md">
+                <label>Account</label>
+                <select name="account" class="form-select">
+                    {% for account in accounts %}
+                        <option value="{{account.id}}">{{account}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md">
+                <label>Category</label>
+                <select name="category" class="form-select">
+                    {% for category in categories %}
+                        <option value="{{category.id}}">{{category}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md">
+                <label>Timespan</label>
+                <select name="timespan" class="form-select">
+                    <option>Last 7 days</option>
+                </select>
+            </div>
+        
+            
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">
+                <input style="width: 100%" type="submit" class="botao-principal" value="filter">
+                
+            </div>
+            </form>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="card">
+            
+                <table>
+                    <tr>
+                        <th>Account</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Value</th>
+                        
+                    </tr>
+                    {% for value in values %}
+                        <tr class="linha">
+                            <td width="10%">{{value.account}}</td>
+                            <td>{{value.category}}</td>
+                            <td>{{value.date}}</td>
+                            <td>
+                            {% if value.type == 'O'%}
+                                <img width="40px" alt=""src="{% static 'profile/img/down_arrow.png' %}">
+                            {% else %}
+                                <img width="40px"  alt="" src="{% static 'profile/img/up_arrow.png' %}">
+                            {% endif %}
+                            
+                            </td>
+                            <td>R$ {{value.value}}</td>
+                            
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            
+        </div>
+    </div>
+{% endblock %}

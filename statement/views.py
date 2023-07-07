@@ -1,10 +1,28 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.messages import constants
+from datetime import datetime
 
 from user_profile.models import Category, Account
 from .forms import ValueForm
+from .models import Values
 
+def view_statement(request):
+    account = Account.objects.all()
+    category = Category.objects.all()
+
+    account_get = request.GET.get('account')
+    category_get = request.GET.get('category')
+    values = Values.objects.filter(date__month=datetime.now().month)
+
+    if account_get:
+        values = values.filter(account__id=account_get)
+    if category_get:
+        values = values.filter(category__id=category_get)
+ 
+
+    return render(request, 'view_statement.html', {'values': values, 'accounts': account, 'categories': category})
+    
 
 # Create your views here.
 def create_value(req):
