@@ -14,12 +14,12 @@
   <span class="fonte-destaque">Adicionar entradas/saídas</span>
   <div class="row">
     <div class="col-md-7">
-      <form action="" method="POST">
+      <form action="{% url 'create_value' %}" method="POST">
         {% csrf_token %}
         <div class="row">
           <div class="col-md">
             <label>Valor</label>
-            <input name="valor" type="text" class="form-control" />
+            <input name="value" type="text" class="form-control" />
           </div>
 
           <div class="col-md">
@@ -32,18 +32,18 @@
           </div>
         </div>
         <br />
-        <label>Descrição</label>
-        <textarea name="descricao" class="form-control"></textarea>
+        <label>Description</label>
+        <textarea name="description" class="form-control"></textarea>
         <br />
         <div class="row">
           <div class="col-md">
-            <label>Data</label>
-            <input name="data" type="date" class="form-control" />
+            <label>Date</label>
+            <input name="date" type="date" class="form-control" />
           </div>
 
           <div class="col-md">
-            <label>Conta</label>
-            <select name="conta" class="form-select">
+            <label>Account</label>
+            <select name="account" class="form-select">
               {% for account in accounts %}
               <option value="{{account.id}}">{{account.bank}}</option>
               {% endfor %}
@@ -51,10 +51,10 @@
           </div>
         </div>
         <br />
-        <input type="radio" name="tipo" value="E" />
-        <label class="positivo">Entrada</label>
-        <input type="radio" name="tipo" value="S" />
-        <label class="negativo">Saída</label>
+        <input type="radio" name="type" value="I" />
+        <label class="positivo">In</label>
+        <input type="radio" name="tipo" value="O" />
+        <label class="negativo">Out</label>
         <br />
         <br />
         <input type="submit" style="width: 40%" class="botao-principal" />
