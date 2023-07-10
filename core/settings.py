@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'user_profile',
     'statement',
     'planning',
-    'accounts'
+    'bill'
 ]
 
 MIDDLEWARE = [
